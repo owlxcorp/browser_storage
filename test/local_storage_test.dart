@@ -1,5 +1,5 @@
-import 'package:browser_storage/storage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:browser_storage/storage.dart';
 
 const en = 'en';
 const pt = 'pt';
@@ -8,12 +8,12 @@ const english = 'english';
 const portuguese = 'portuguese';
 
 void main() {
-  group('SessionStorage', () {
-    setUp(() => SessionStorage().clear());
+  group('LocalStorage', () {
+    setUp(() => LocalStorage().clear());
 
     test('should return same value regardless of instance', () {
-      final s1 = SessionStorage();
-      final s2 = SessionStorage();
+      final s1 = LocalStorage();
+      final s2 = LocalStorage();
 
       s1[en] = english;
       s2[pt] = portuguese;
@@ -25,7 +25,7 @@ void main() {
     });
 
     test('operators []= and [] should assign and retrieve value', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       session[en] = english;
 
@@ -33,7 +33,7 @@ void main() {
     });
 
     test('.addAll should add all values', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       session[en] = 'default';
 
@@ -44,7 +44,7 @@ void main() {
     });
 
     test('.addEntries should add all values', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       session[en] = 'default';
 
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('.cast should cast to valid value', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       final cast = session.cast<Object, Object>();
 
@@ -66,7 +66,7 @@ void main() {
     });
 
     test('.clear should remove all values', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       session[en] = english;
 
@@ -78,7 +78,7 @@ void main() {
     });
 
     test('.containsKey should return correct values', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       expect(session.containsKey(en), false);
 
@@ -88,7 +88,7 @@ void main() {
     });
 
     test('.containsValue should return correct values', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       expect(session.containsValue(english), false);
 
@@ -98,7 +98,7 @@ void main() {
     });
 
     test('.entries should return array of MapEntry', () {
-      final session = SessionStorage()..addAll({en: english, pt: portuguese});
+      final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
       final entries = session.entries;
 
@@ -109,7 +109,7 @@ void main() {
     test('.forEach should go through all values', () {
       final order = <String>[];
 
-      SessionStorage()
+      LocalStorage()
         ..addAll({en: english, pt: portuguese})
         ..forEach(
           (key, value) => order
@@ -121,7 +121,7 @@ void main() {
     });
 
     test('.isEmpty and .isNotEmpty should return correct values', () {
-      final session = SessionStorage();
+      final session = LocalStorage();
 
       expect(session.isEmpty, true);
       expect(session.isNotEmpty, false);
@@ -133,19 +133,19 @@ void main() {
     });
 
     test('.keys should return all keys', () {
-      final session = SessionStorage()..addAll({en: english, pt: portuguese});
+      final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
       expect(session.keys, containsAll(<String>[en, pt]));
     });
 
     test('.length should return correct length', () {
-      final session = SessionStorage()..addAll({en: english, pt: portuguese});
+      final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
       expect(session.length, 2);
     });
 
     test('.map should be able to change all keys and values', () {
-      final session = SessionStorage()..addAll({en: english, pt: portuguese});
+      final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
       final mapped = session.map<int, bool>(
         (key, value) => MapEntry(
@@ -160,7 +160,7 @@ void main() {
 
     group('.putIfAbsent', () {
       test('should put key if it does not exist', () {
-        final session = SessionStorage()
+        final session = LocalStorage()
           ..addAll({en: english})
           ..putIfAbsent(pt, () => portuguese);
 
@@ -168,7 +168,7 @@ void main() {
       });
 
       test('should ignore put if key exists', () {
-        final session = SessionStorage()
+        final session = LocalStorage()
           ..addAll({en: english})
           ..putIfAbsent(en, () => 'default');
 
@@ -178,7 +178,7 @@ void main() {
 
     group('.remove', () {
       test('should remove existing key', () {
-        final session = SessionStorage()..addAll({en: english, pt: portuguese});
+        final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
         expect(session[pt], portuguese);
 
@@ -188,7 +188,7 @@ void main() {
       });
 
       test('should do nothing on invalid key', () {
-        final session = SessionStorage()
+        final session = LocalStorage()
           ..addAll({en: english, pt: portuguese})
           ..remove('de');
 
@@ -198,7 +198,7 @@ void main() {
     });
 
     test('.removeWhere should remove existing value based on where', () {
-      final session = SessionStorage()..addAll({en: english, pt: portuguese});
+      final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
       expect(session[en], english);
       expect(session[pt], portuguese);
@@ -211,7 +211,7 @@ void main() {
 
     group('.update', () {
       test('should update key if it exists', () {
-        final session = SessionStorage()..addAll({en: english, pt: portuguese});
+        final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
         expect(session[en], english);
 
@@ -223,8 +223,7 @@ void main() {
       test(
         'should add key if it does not exist and ifAbsent function passed',
         () {
-          final session = SessionStorage()
-            ..addAll({en: english, pt: portuguese});
+          final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
           expect(session['de'], null);
 
@@ -241,8 +240,7 @@ void main() {
       test(
         'should throw if key does not exist and there is no ifAbsent function',
         () {
-          final session = SessionStorage()
-            ..addAll({en: english, pt: portuguese});
+          final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
           void shouldThrow() => session.update(
                 'de',
@@ -257,7 +255,7 @@ void main() {
     test(
       '.updateAll should update values based on provided function',
       () {
-        final session = SessionStorage()..addAll({en: english, pt: portuguese});
+        final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
         expect(session[en], english);
         expect(session[pt], portuguese);
@@ -272,7 +270,7 @@ void main() {
     test(
       '.values should return all values',
       () {
-        final session = SessionStorage()..addAll({en: english, pt: portuguese});
+        final session = LocalStorage()..addAll({en: english, pt: portuguese});
 
         expect(
           session.values,

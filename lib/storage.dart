@@ -1,13 +1,13 @@
-library session_storage;
+library browser_storage;
 
-import 'package:session_storage/session_storage_generic.dart'
-    if (dart.library.html) 'package:session_storage/session_storage_web.dart'
+import 'package:browser_storage/storage_generic.dart'
+    if (dart.library.html) 'package:browser_storage/storage_web.dart'
     as interop;
 
 /// An abstraction over [Map] that allows for SessionStorage to be used on
 /// non-web platforms without issues.
-class SessionStorage implements Map<String, String> {
-  static final Map<String, String> _instance = interop.sessionStorage;
+abstract class _Storage implements Map<String, String> {
+  abstract final Map<String, String> _instance;
 
   @override
   String? operator [](Object? key) =>
@@ -87,4 +87,16 @@ class SessionStorage implements Map<String, String> {
 
   @override
   Iterable<String> get values => _instance.values;
+}
+
+/// A class that represents the SessionStorage which implements Storage.
+class SessionStorage extends _Storage {
+  @override
+  final Map<String, String> _instance = interop.sessionStorage;
+}
+
+/// A class that represents the SessionStorage which implements Storage.
+class LocalStorage extends _Storage {
+  @override
+  final Map<String, String> _instance = interop.localStorage;
 }

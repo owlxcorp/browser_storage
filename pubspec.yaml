@@ -1,7 +1,7 @@
-name: session_storage
-description: Allows manipulation of SessionStorage on Web platform while using an in-memory map for other platforms.
+name: browser_storage
+description: Allows manipulation of Storage on Web platform while using an in-memory map for other platforms. Based on https://github.com/JCQuintas/session_storage. 
 version: 0.0.1
-homepage: https://github.com/JCQuintas/session_storage
+homepage: https://github.com/owlxcorp/browser_storage
 
 environment:
   sdk: ">=2.18.0 <3.0.0"

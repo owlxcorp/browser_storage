@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:session_storage/session_storage.dart';
+import 'package:browser_storage/storage.dart';
 
 void main() {
   SessionStorage()..addAll({'language': 'english', 'name': 'Session Man'});
+  LocalStorage()..addAll({'language': 'english', 'name': 'Session Man'});
   runApp(const MyApp());
 }
 
@@ -27,11 +28,14 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final session = SessionStorage();
+    final local = LocalStorage();
 
     return Column(
       children: [
-        Text('User: ${session['name']}'),
-        Text('Language: ${session['language']}'),
+        Text('Session User: ${session['name']}'),
+        Text('Session Language: ${session['language']}'),
+        Text('Local User: ${local['name']}'),
+        Text('Local Language: ${local['language']}'),
       ],
     );
   }

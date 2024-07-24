@@ -3,3 +3,6 @@ import 'dart:html';
 
 /// The session storage for web.
 final Map<String, String> sessionStorage = window.sessionStorage;
+
+/// The local storage for web.
+final Map<String, String> localStorage = window.localStorage;
