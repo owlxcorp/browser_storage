@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:browser_storage/storage.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 const en = 'en';
 const pt = 'pt';

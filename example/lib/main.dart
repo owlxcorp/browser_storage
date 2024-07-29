@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:browser_storage/storage.dart';
+import 'package:browser_storage/browser_storage.dart';
 
 void main() {
   SessionStorage()..addAll({'language': 'english', 'name': 'Session Man'});
