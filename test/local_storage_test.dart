@@ -1,4 +1,4 @@
-import 'package:browser_storage/storage.dart';
+import 'package:browser_storage/browser_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const en = 'en';
