@@ -1,6 +1,6 @@
 name: browser_storage
 description: Allows manipulation of Storage on Web platform while using an in-memory map for other platforms. Based on https://github.com/JCQuintas/session_storage. 
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/owlxcorp/browser_storage
 
 environment:
